@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Smart Irrigation</title>
+
+    <style>
+
+        body{
+            background:#eaf3ea;
+            font-family:Arial;
+        }
+
+        .container{
+            width:500px;
+            margin:80px auto;
+            background:white;
+            padding:40px;
+            border-radius:20px;
+            text-align:center;
+            box-shadow:0px 0px 15px rgba(0,0,0,0.1);
+        }
+
+        h1{
+            color:green;
+            font-size:50px;
+        }
+
+        input{
+            width:90%;
+            padding:15px;
+            margin:15px;
+            font-size:20px;
+        }
+
+        button{
+            padding:15px 40px;
+            background:green;
+            color:white;
+            border:none;
+            font-size:22px;
+            border-radius:8px;
+            cursor:pointer;
+        }
+
+        h2{
+            color:green;
+            margin-top:30px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Smart Irrigation System</h1>
+
+    <form method="POST">
+
+        <input type="number"
+               name="temperature"
+               placeholder="Temperature"
+               required>
+
+        <input type="number"
+               name="humidity"
+               placeholder="Humidity"
+               required>
+
+        <input type="number"
+               name="moisture"
+               placeholder="Moisture"
+               required>
+
+        <input type="number"
+               name="soil_type"
+               placeholder="Soil Type"
+               required>
+
+        <button type="submit">
+            Predict
+        </button>
+
+    </form>
+
+    {% if prediction is not none %}
+
+        <h2>
+            Prediction Result: {{ prediction }}
+        </h2>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

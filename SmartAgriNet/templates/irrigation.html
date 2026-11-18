@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Irrigation System</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #e8f5e9;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        .container {
+            width: 350px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        h1 {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Smart Irrigation System</h1>
+
+    <input type="number" id="temperature" placeholder="Temperature">
+    <input type="number" id="humidity" placeholder="Humidity">
+    <input type="number" id="soil_moisture" placeholder="Soil Moisture">
+    <input type="number" id="rainfall" placeholder="Rainfall">
+
+    <button onclick="predictIrrigation()">Predict</button>
+
+    <h2 id="result"></h2>
+</div>
+
+<script>
+async function predictIrrigation() {
+
+    const data = {
+        temperature: parseFloat(document.getElementById("temperature").value),
+        humidity: parseFloat(document.getElementById("humidity").value),
+        soil_moisture: parseFloat(document.getElementById("soil_moisture").value),
+        rainfall: parseFloat(document.getElementById("rainfall").value)
+    };
+
+const response = await fetch("/irrigation", {        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+
+    document.getElementById("result").innerText =
+        result.irrigation == 1
+        ? "Irrigation Needed 🌱"
+        : "No Irrigation Needed 💧";
+}
+</script>
+
+</body>
+</html>
